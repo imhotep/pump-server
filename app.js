@@ -6,7 +6,8 @@
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , register = require('./lib/register.js');
 
 var app = express();
 
@@ -27,6 +28,10 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+
+var register = register.create();
+register.install(app);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
